@@ -1,27 +1,28 @@
-
 package br.edu.ifsul.testes.junit;
 
+import br.edu.ifsul.modelo.Arquivo;
 import br.edu.ifsul.modelo.Produto;
 import java.io.IOException;
-import java.util.List;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 /**
  *
- * @author Telmo
+ * @author Jorge
  */
-public class TesteConsultarQuery {
-    
+public class TestePersistirArquivoProduto {
+
     EntityManagerFactory emf;
     EntityManager em;
 
-    public TesteConsultarQuery() {
+    public TestePersistirArquivoProduto() {
     }
 
     @Before
@@ -38,16 +39,16 @@ public class TesteConsultarQuery {
 
     @Test
     public void teste() throws IOException {
-        
-        // mostrar a consulta sem o parametro
-        //instrução HQL (referencia as classes e os seus respectivos atributos)
-        Query consulta = em.createQuery("from Produto where nome like 'C%'");
-        List<Produto> lista = consulta.getResultList();
-        for (Produto p : lista) {
-            System.out.println("ID: " + p.getId() + " Nome: " + p.getNome());
-        }
-    
-        
+        Produto p = em.find(Produto.class, 1);
+        Arquivo a = new Arquivo();
+        a.setNomeArquivo("mouse.pdf");
+        a.setDescricao("Foto do mouse");
+        Path path = Paths.get("C:\\Users\\deces\\Downloads\\mouse.jpg");
+        a.setArquivo(Files.readAllBytes(path));
+        a.setProduto(p);
+        em.getTransaction().begin();
+        em.persist(a);
+        em.getTransaction().commit();
     }
-    
+
 }

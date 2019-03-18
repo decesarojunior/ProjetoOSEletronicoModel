@@ -1,7 +1,7 @@
-
 package br.edu.ifsul.testes.junit;
 
-import br.edu.ifsul.modelo.Estado;
+import br.edu.ifsul.modelo.OrdemServico;
+import java.io.IOException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -11,38 +11,35 @@ import org.junit.Test;
 
 /**
  *
- * @author Telmo
+ * @author Jorge
  */
-public class TestePersistirEstado {
-    
+public class TestePersistirContaReceberPrazo {
+
     EntityManagerFactory emf;
     EntityManager em;
-    
-    public TestePersistirEstado() {
+
+    public TestePersistirContaReceberPrazo() {
     }
-    
+
     @Before
     public void setUp() {
         emf = Persistence.createEntityManagerFactory("OSEletronicosModelPU");
-        em = emf.createEntityManager();        
+        em = emf.createEntityManager();
     }
-    
+
     @After
     public void tearDown() {
         em.close();
         emf.close();
     }
-    
+
     @Test
-    public void teste(){
-        
-        Estado e = new Estado();//nesse momento o e está no estado: New
-        e.setNome("Santa Catarina");
-        e.setUf("SC");
+    public void teste() throws IOException {
+        OrdemServico os = em.find(OrdemServico.class, 2);
+        os.gerarContasReceber();
         em.getTransaction().begin();
-        em.persist(e);//o status do objeto e passa para: Managed
+        em.persist(os);
         em.getTransaction().commit();
-        
     }
-    
+
 }

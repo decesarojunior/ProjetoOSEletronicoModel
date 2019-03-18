@@ -63,7 +63,7 @@ public class Produto implements Serializable{
     @Min(message = "O preço não pode ser negativo", value = 0)
     @NotNull(message = "O preço deve ser informado")
     @Column(name = "preco", nullable = false, columnDefinition = "numeric(12,2)")
-    private Float preco;
+    private Double preco;
     
     @NotNull(message = "A marca deve ser informada")
     @ManyToOne
@@ -121,11 +121,11 @@ public class Produto implements Serializable{
         this.descricao = descricao;
     }
 
-    public Float getPreco() {
+    public Double getPreco() {
         return preco;
     }
 
-    public void setPreco(Float preco) {
+    public void setPreco(Double preco) {
         this.preco = preco;
     }
 

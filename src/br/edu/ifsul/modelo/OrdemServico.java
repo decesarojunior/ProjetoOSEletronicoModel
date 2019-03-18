@@ -139,6 +139,7 @@ public class OrdemServico implements Serializable {
                 id.setNumeroParcela(1);
                 id.setOrdemServico(this);
                 conta.setId(id);
+                conta.setOrdemServico(this);
                 this.getContasReceber().add(conta); 
         } else if (this.getFormaPagamento() == FormaPagamento.APRAZO) {
             Double valorParcela = this.valorTotal / this.quantidadeParcelas;
@@ -152,6 +153,7 @@ public class OrdemServico implements Serializable {
                 id.setNumeroParcela(i);
                 id.setOrdemServico(this);
                 conta.setId(id);
+                conta.setOrdemServico(this);
                 this.getContasReceber().add(conta);               
             }
         }

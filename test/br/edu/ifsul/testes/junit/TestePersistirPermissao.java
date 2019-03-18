@@ -1,24 +1,25 @@
-
 package br.edu.ifsul.testes.junit;
 
 import br.edu.ifsul.modelo.Estado;
+import br.edu.ifsul.modelo.Permissao;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
  *
- * @author Telmo
+ * @author Jorge
  */
-public class TestePersistirEstado {
+public class TestePersistirPermissao {
     
     EntityManagerFactory emf;
     EntityManager em;
     
-    public TestePersistirEstado() {
+    public TestePersistirPermissao() {
     }
     
     @Before
@@ -35,14 +36,16 @@ public class TestePersistirEstado {
     
     @Test
     public void teste(){
-        
-        Estado e = new Estado();//nesse momento o e está no estado: New
-        e.setNome("Santa Catarina");
-        e.setUf("SC");
+        Permissao p1 = new Permissao();
+        p1.setNome("ADMINISTRADOR");
+        p1.setDescricao("Adminstrador do sistema");
+        Permissao p2 = new Permissao();
+        p2.setNome("USUARIO");
+        p2.setDescricao("Usuários e clientes do sistema");
         em.getTransaction().begin();
-        em.persist(e);//o status do objeto e passa para: Managed
-        em.getTransaction().commit();
-        
+        em.persist(p1);
+        em.persist(p2);
+        em.getTransaction().commit();        
     }
     
 }

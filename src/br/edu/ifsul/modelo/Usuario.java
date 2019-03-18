@@ -35,7 +35,11 @@ import org.hibernate.validator.constraints.NotBlank;
 @Table(name = "usuario")
 @DiscriminatorColumn(name = "tipo", discriminatorType = DiscriminatorType.STRING,length = 2)
 @DiscriminatorValue(value = "US")
-@NamedQuery(name="todosUsuarioOrdemNome",query="from Usuario order by nome")
+@NamedQuery(name="todosUsuarioOrdemNome",query="from Usuario order by nome asc")
+
+//definir uma Namequery para fazer a autenticacao do Usuario na aplicacao web
+@NamedQuery(name="autenticacaoUsuario", query = "from Usuario where nomeUsuario = :paramNome and senha = :paramSenha")
+
 public class Usuario implements Serializable {
     
     @Id

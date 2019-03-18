@@ -29,7 +29,7 @@
       <property name="hibernate.hbm2ddl.auto" value="update"/>
       <property name="hibernate.show_sql" value="false"/>
       <property name="hibernate.format_sql" value="false"/>
-      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+     <!-- <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>-->
     </properties>
   </persistence-unit>
 </persistence>
