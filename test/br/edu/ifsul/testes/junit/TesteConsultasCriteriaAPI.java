@@ -19,29 +19,23 @@ import org.junit.Test;
  * @author Jorge
  */
 public class TesteConsultasCriteriaAPI {
-
     EntityManagerFactory emf;
     EntityManager em;
-
     public TesteConsultasCriteriaAPI() {
     }
-
     @Before
     public void setUp() {
         emf = Persistence.createEntityManagerFactory("OSEletronicosModelPU");
         em = emf.createEntityManager();
     }
-
     @After
     public void tearDown() {
         em.close();
         emf.close();
     }
-
     @Test
     public void teste() throws IOException {
-	// consulta que retorna todos os produtos
-        //objeto criador de criterias
+	// consulta que retorna todos os produtos - objeto criador de criterias   
         CriteriaBuilder builder = em.getCriteriaBuilder();
         // criteria query
         CriteriaQuery<Produto> query = builder.createQuery(Produto.class);
@@ -50,11 +44,9 @@ public class TesteConsultasCriteriaAPI {
         // definindo a raiz da consulta
         query.select(raiz);
         // filtrando com equal que é similar ao =
-        //query.where(builder.equal(raiz.get("nome"), "Mouse Laser Dell"));	        
-        // filtrando com like
+        //query.where(builder.equal(raiz.get("nome"), "Mouse Laser Dell"));	  
         query.where(builder.like(raiz.<String>get("nome"), "%Mou%"));        
-        // ordenando
-        query.orderBy(builder.asc(raiz.get("nome")));
+        query.orderBy(builder.asc(raiz.get("nome")));//ordenando
         // lancando uma consulta em uma coleção tipada
         TypedQuery<Produto> q = em.createQuery(query);
         List<Produto> lista = q.getResultList();
