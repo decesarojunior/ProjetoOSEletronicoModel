@@ -135,31 +135,31 @@ public class OrdemServico implements Serializable {
                 conta.setValorPago(this.valorTotal);
                 conta.setVencimento(this.dataFechamento);
                 conta.setDataPagamento(this.dataFechamento);
-                ContaReceberID id = new ContaReceberID();
-                id.setNumeroParcela(1);
-                id.setOrdemServico(this);
-                conta.setId(id);
-                conta.setOrdemServico(this);
+                ContaReceberID idCR = new ContaReceberID();
+                idCR.setNumeroParcela(1);
+                idCR.setOrdemServico(this);
+                conta.setId(idCR);
+                //conta.setOrdemServico(this);
                 this.getContasReceber().add(conta); 
         } else if (this.getFormaPagamento() == FormaPagamento.APRAZO) {
             Double valorParcela = this.valorTotal / this.quantidadeParcelas;
             for (int i = 1; i <= this.quantidadeParcelas; i++) {
                 ContaReceber conta = new ContaReceber();
                 conta.setValor(valorParcela);
-                Calendar vencimento = (Calendar) this.dataFechamento.clone();
+                Calendar vencimento = (Calendar) this.dataFechamento.clone();//pode chegar java.lang.NullPointerException
                 vencimento.add(Calendar.MONTH, i);
                 conta.setVencimento(vencimento);
-                ContaReceberID id = new ContaReceberID();
-                id.setNumeroParcela(i);
-                id.setOrdemServico(this);
-                conta.setId(id);
-                conta.setOrdemServico(this);
+                ContaReceberID idCR = new ContaReceberID();
+                idCR.setNumeroParcela(i);
+                idCR.setOrdemServico(this);
+                conta.setId(idCR);
+                //conta.setOrdemServico(this);
                 this.getContasReceber().add(conta);               
             }
         }
     }
         
-        public void atualizaValorTotal() {
+    public void atualizaValorTotal() {
         this.valorTotal = this.valorProdutos + this.valorServicos;
     }
 
