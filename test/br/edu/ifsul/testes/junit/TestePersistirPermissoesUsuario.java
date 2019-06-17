@@ -35,9 +35,10 @@ public class TestePersistirPermissoesUsuario {
     
     @Test
     public void teste(){
-        Usuario obj = em.find(Usuario.class, "decesarojunior");
+        Usuario obj = em.find(Usuario.class, "teste");
         obj.getPermissoes().add(em.find(Permissao.class, "ADMINISTRADOR"));
-        obj.getPermissoes().add(em.find(Permissao.class, "USUARIO"));        
+        obj.getPermissoes().add(em.find(Permissao.class, "USUARIO"));      
+        obj.getPermissoes().add(em.find(Permissao.class, "CLIENTE"));              
         em.getTransaction().begin();
         em.persist(obj);
         em.getTransaction().commit();        

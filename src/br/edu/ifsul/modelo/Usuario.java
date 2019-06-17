@@ -3,6 +3,7 @@ package br.edu.ifsul.modelo;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.Column;
@@ -90,7 +91,7 @@ public class Usuario implements Serializable {
             @JoinColumn(name = "nome_usuario", referencedColumnName = "nome_usuario", nullable = false),
             inverseJoinColumns = 
             @JoinColumn(name = "permissao", referencedColumnName = "nome", nullable = false)) 
-    private Set<Permissao> permissoes; //associação bidirecional
+    private Set<Permissao> permissoes; 
     
     public Usuario(){
         

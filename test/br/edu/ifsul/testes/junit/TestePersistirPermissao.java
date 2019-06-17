@@ -38,13 +38,20 @@ public class TestePersistirPermissao {
     public void teste(){
         Permissao p1 = new Permissao();
         p1.setNome("ADMINISTRADOR");
-        p1.setDescricao("Adminstrador do sistema");
+        p1.setDescricao("Acesso a privado/*");
+        
         Permissao p2 = new Permissao();
         p2.setNome("USUARIO");
-        p2.setDescricao("Usuários e clientes do sistema");
+        p2.setDescricao("Acesso a privado/ordemservico/*");
+        
+        Permissao p3 = new Permissao();
+        p3.setNome("CLIENTE");
+        p3.setDescricao("Acesso a definir");
+         
         em.getTransaction().begin();
-        em.persist(p1);
-        em.persist(p2);
+        //em.persist(p1);
+        //em.persist(p2);
+        em.persist(p3);
         em.getTransaction().commit();        
     }
     
